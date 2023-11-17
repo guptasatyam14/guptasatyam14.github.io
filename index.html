@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Request</title>
+</head>
+<body>
+
+<form id="paymentForm">
+    <label for="payee">Payee Email/ID:</label>
+    <input type="text" id="payee" name="payee" required><br>
+
+    <label for="payeeName">Payee Name:</label>
+    <input type="text" id="payeeName" name="payeeName" required><br>
+
+    <label for="amount">Amount:</label>
+    <input type="text" id="amount" name="amount" required><br>
+
+    <button type="button" onclick="initiatePayment()">Click to Pay</button>
+</form>
+
+<script>
+function initiatePayment() {
+    var payee = document.getElementById('payee').value;
+    var payeeName = document.getElementById('payeeName').value;
+    var amount = document.getElementById('amount').value;
+
+    var paymentAppDeepLink = constructPaymentDeepLink(payee, payeeName, amount);
+
+    // Try to open the payment app
+    window.location.href = paymentAppDeepLink;
+}
+
+function constructPaymentDeepLink(payee, payeeName, amount) {
+    // Replace this logic with the actual deep link format for the payment app you are integrating with
+    var deepLink = 'upi://pay?pa=' + payee + '&pn=' + payeeName + '&mc=1234&tid=txnId12345&tr=yourRefId&tn=Test%20Transaction&am=' + amount + '&cu=INR&url=https://example.com/callback';
+    
+    return deepLink;
+}
+</script>
+
+</body>
+</html>
